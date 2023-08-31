@@ -1,0 +1,22 @@
+{
+    "identification": "Identification",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "passwordsDontMatch": "Passwords don't match",
+    "createAccount": "Create an account",
+    "forgotPassword": "Forgot password ?",
+    "accountSuccessfullyCreated": "Account successfully created",
+    "successfullyLoggedOut": "Successfully logged out",
+    "successfullyLoggedIn": "Successfully logged in",
+    "anErrorHasOccurred": "An error has occurred",
+    "userNotFound": "There is no user record corresponding to this identifier. The user may have been deleted.",
+    "wrongPassword": "The password is invalid or the user does not have a password.",
+    "weakPassword": "Password should be at least 6 characters",
+    "emailAlreadyInUse": "The email address is already in use by another account.",
+    "search": "Search",
+    "home": "Home",
+    "settings": "Settings",
+    "logout": "Logout"
+}

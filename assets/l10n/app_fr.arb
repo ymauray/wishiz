@@ -1,0 +1,22 @@
+{
+    "identification": "Identification",
+    "login": "Connexion",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas",
+    "createAccount": "Créer un compte",
+    "forgotPassword": "Mot de passe oublié ?",
+    "accountSuccessfullyCreated": "Compte créé avec succès",
+    "successfullyLoggedOut": "Déconnexion réussie",
+    "successfullyLoggedIn": "Connexion réussie",
+    "anErrorHasOccurred": "Une erreur est survenue",
+    "userNotFound": "Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant. L'utilisateur peut avoir été supprimé.",
+    "wrongPassword": "Le mot de passe est invalide ou l'utilisateur n'a pas de mot de passe.",
+    "weakPassword": "Le mot de passe doit comporter au moins 6 caractères",
+    "emailAlreadyInUse": "L'adresse courriel est déjà utilisée par un autre compte.",
+    "search": "Rechercher",
+    "home": "Accueil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+}
