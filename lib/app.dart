@@ -20,10 +20,7 @@ class MainApp extends ConsumerStatefulWidget {
 }
 
 class _MainAppState extends ConsumerState<MainApp> {
-  //late StreamSubscription<List<SharedMediaFile>>
-  //    _intentMediaDataStreamSubscription;
   late StreamSubscription<String> _intentTextDataStreamSubscription;
-  //List<SharedMediaFile>? _sharedFiles;
   String? _sharedText;
 
   @override
@@ -32,32 +29,6 @@ class _MainAppState extends ConsumerState<MainApp> {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       ref.read(authStateProvider.notifier).setUser(user);
     });
-
-    //// For sharing images coming from outside the app while the app is in the memory
-    //_intentMediaDataStreamSubscription =
-    //    ReceiveSharingIntent.getMediaStream().listen(
-    //  (List<SharedMediaFile> value) {
-    //    setState(() {
-    //      _sharedFiles = value;
-    //      print(
-    //        "ReceiveSharingIntent.getMediaStream : ${_sharedFiles?.map((f) => f.path).join(",") ?? ""}",
-    //      );
-    //    });
-    //  },
-    //  onError: (err) {
-    //    print('ReceiveSharingIntent.getMediaStream error: $err');
-    //  },
-    //);
-
-    //// For sharing images coming from outside the app while the app is closed
-    //ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
-    //  setState(() {
-    //    _sharedFiles = value;
-    //    print(
-    //      "ReceiveSharingIntent.getInitialMedia : ${_sharedFiles?.map((f) => f.path).join(",") ?? ""}",
-    //    );
-    //  });
-    //});
 
     // For sharing or opening urls/text coming from outside the app while the app is in the memory
     _intentTextDataStreamSubscription =
@@ -80,30 +51,10 @@ class _MainAppState extends ConsumerState<MainApp> {
         print('ReceiveSharingIntent.getInitialText : $_sharedText');
       });
     });
-
-    //ReceiveSharingIntent.getTextStreamAsUri().listen(
-    //  (Uri value) {
-    //    setState(() {
-    //      _sharedText = value.toString();
-    //      print('ReceiveSharingIntent.getTextStreamAsUri : $_sharedText');
-    //    });
-    //  },
-    //  onError: (err) {
-    //    print('ReceiveSharingIntent.getTextStreamAsUri error: $err');
-    //  },
-    //);
-
-    //ReceiveSharingIntent.getInitialTextAsUri().then((Uri? value) {
-    //  setState(() {
-    //    _sharedText = value?.toString();
-    //    print('ReceiveSharingIntent.getInitialTextAsUri : $_sharedText');
-    //  });
-    //});
   }
 
   @override
   void dispose() {
-    //_intentMediaDataStreamSubscription.cancel();
     _intentTextDataStreamSubscription.cancel();
     super.dispose();
   }
@@ -111,14 +62,11 @@ class _MainAppState extends ConsumerState<MainApp> {
   @override
   Widget build(BuildContext context) {
     debugPrint('build : sharedText : $_sharedText');
-    //debugPrint(
-    //  "build : sharedFiles : ${_sharedFiles?.map((f) => f.path).join(",") ?? ""}",
-    //);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
-        ...AppLocalizations.localizationsDelegates
+        ...AppLocalizations.localizationsDelegates,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppTheme().themeData(context),

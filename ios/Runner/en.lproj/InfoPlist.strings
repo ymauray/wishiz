@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Yannick Mauray on 07.09.23.
+  
+*/
+
+"NSPhotoLibraryUsageDescription" = "To assign photos to items, please allow permission to access your photo library.";

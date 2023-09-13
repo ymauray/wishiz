@@ -18,5 +18,11 @@
     "search": "Search",
     "home": "Home",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "newItem": "New item",
+    "name": "Name",
+    "price": "Price",
+    "link": "Link",
+    "cancel": "Cancel",
+    "submit": "Submit"
 }

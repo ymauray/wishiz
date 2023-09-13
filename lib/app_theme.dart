@@ -23,6 +23,10 @@ class AppTheme {
           elevation: 0,
           color: Colors.transparent,
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: AppTheme.violet,
+          foregroundColor: Colors.white,
+        ),
         textTheme: GoogleFonts.poppinsTextTheme().apply(
           displayColor: Colors.white,
           bodyColor: Colors.white,
@@ -64,5 +68,6 @@ class AppTheme {
             foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
         ),
+        dialogBackgroundColor: AppTheme.violet,
       );
 }

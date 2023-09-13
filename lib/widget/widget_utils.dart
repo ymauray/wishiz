@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wishiz/l10n.dart';
-import 'package:wishiz/service/firebase_service.dart';
+import 'package:wishiz/service/firebase_service_response.dart';
 
 mixin WidgetUtils on ConsumerWidget {
   void _snackMessage(BuildContext context, String message, bool success) {
@@ -21,8 +21,11 @@ mixin WidgetUtils on ConsumerWidget {
     _snackMessage(context, message, false);
   }
 
-  String firebaseErrorMessage<T>(BuildContext context, Response<T> response) {
-    if (response.status == ResponseStatus.success) {
+  String firebaseErrorMessage<T>(
+    BuildContext context,
+    FirebaseServiceResponse<T> response,
+  ) {
+    if (response.status == FirebaseServiceResponseStatus.success) {
       return '';
     } else {
       switch (response.errorCode) {

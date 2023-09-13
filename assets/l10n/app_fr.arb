@@ -18,5 +18,11 @@
     "search": "Rechercher",
     "home": "Accueil",
     "settings": "Paramètres",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "newItem": "Nouvel élément",
+    "name": "Nom",
+    "price": "Prix",
+    "link": "Lien",
+    "cancel": "Annuler",
+    "submit": "Valider"
 }

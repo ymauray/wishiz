@@ -8,7 +8,7 @@ import 'package:wishiz/page/login_page/login_page_state.dart';
 import 'package:wishiz/page/tab_page/tab_page.dart';
 import 'package:wishiz/provider/firebase_service.dart';
 import 'package:wishiz/provider/shared_preferences_service.dart';
-import 'package:wishiz/service/firebase_service.dart';
+import 'package:wishiz/service/firebase_service_response.dart';
 import 'package:wishiz/widget/app_name.dart';
 import 'package:wishiz/widget/widget_utils.dart';
 
@@ -30,7 +30,7 @@ class LoginPage extends ConsumerWidget with WidgetUtils {
           child: Center(
             child: FormBuilder(
               initialValue: {
-                'email': ref.read(sharedPreferencesServiceProvider).email
+                'email': ref.read(sharedPreferencesServiceProvider).email,
               },
               key: _formKey,
               child: Column(
@@ -121,7 +121,7 @@ class LoginPage extends ConsumerWidget with WidgetUtils {
           email: email,
           password: _formKey.currentState?.fields['password']?.value as String,
         );
-    if (response.status != ResponseStatus.success) {
+    if (response.status != FirebaseServiceResponseStatus.success) {
       errorSnack(context, firebaseErrorMessage(context, response));
     } else {
       resetNavigation(context, (context) => const TabPage());
@@ -136,7 +136,7 @@ class LoginPage extends ConsumerWidget with WidgetUtils {
           email: _formKey.currentState?.fields['email']?.value as String,
           password: _formKey.currentState?.fields['password']?.value as String,
         );
-    if (response.status != ResponseStatus.success) {
+    if (response.status != FirebaseServiceResponseStatus.success) {
       errorSnack(context, firebaseErrorMessage(context, response));
     } else {
       successSnack(context, context.t.accountSuccessfullyCreated);
