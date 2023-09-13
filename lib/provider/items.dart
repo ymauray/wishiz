@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,13 +17,39 @@ class FirebaseItems extends _$FirebaseItems {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final ref = FirebaseDatabase.instance.ref('items/$userId');
     final event = await ref.once();
-    final jsonData = event.snapshot.value as String?;
+    final jsonData = (event.snapshot.value as Map<Object?, Object?>).values;
 
-    if (jsonData == null) return [];
+    final data = jsonData
+        .map(
+          (e) => Item.fromJson(
+            (e as Map<Object?, Object?>).cast<String, dynamic>(),
+          ),
+        )
+        .toList();
 
-    final map = jsonDecode(jsonData) as Map<String, dynamic>;
+    return data;
+  }
 
-    return [];
+  FutureOr<void> add({
+    required String name,
+    required String description,
+    required double price,
+    required String imageUrl,
+    required String link,
+  }) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final ref = FirebaseDatabase.instance.ref('items/$userId');
+    final item = Item(
+      name: name,
+      description: description,
+      price: price,
+      imageUrl: imageUrl,
+      link: link,
+      id: '',
+    );
+    await ref.push().set(item.toJson());
+
+    state = await AsyncValue.guard(fetchAll);
   }
 }
 

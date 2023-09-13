@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wishiz/app_theme.dart';
 import 'package:wishiz/l10n.dart';
+import 'package:wishiz/provider/items.dart';
 
 class ItemForm extends ConsumerStatefulWidget {
   const ItemForm({super.key});
@@ -12,6 +13,9 @@ class ItemForm extends ConsumerStatefulWidget {
 
 class _ItemFormState extends ConsumerState<ItemForm> {
   late GlobalKey<FormState> formKey;
+  final nameController = TextEditingController();
+  final priceController = TextEditingController();
+  final linkController = TextEditingController();
 
   @override
   void initState() {
@@ -42,6 +46,7 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           ),
           TextFormField(
             textInputAction: TextInputAction.next,
+            controller: nameController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return '';
@@ -54,6 +59,7 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           ),
           TextFormField(
             textInputAction: TextInputAction.next,
+            controller: priceController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return '';
@@ -66,6 +72,7 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           ),
           TextFormField(
             textInputAction: TextInputAction.done,
+            controller: linkController,
             decoration: InputDecoration(
               labelText: context.t.link,
             ),
@@ -96,6 +103,13 @@ class _ItemFormState extends ConsumerState<ItemForm> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                    ref.read(firebaseItemsProvider.notifier).add(
+                          name: nameController.text,
+                          description: '',
+                          price: double.parse(priceController.text),
+                          imageUrl: '',
+                          link: linkController.text,
+                        );
                     Navigator.of(context).pop();
                   }
                 },

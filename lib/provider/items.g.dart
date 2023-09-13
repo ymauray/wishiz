@@ -6,7 +6,7 @@ part of 'items.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseItemsHash() => r'9016d7836b20ad8ba42ccf6bb4cc9cd65dc3dff5';
+String _$firebaseItemsHash() => r'2fcf2ce00e62df232cfbdefa3eb31ddd93528efd';
 
 /// See also [FirebaseItems].
 @ProviderFor(FirebaseItems)
