@@ -47,6 +47,8 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           TextFormField(
             textInputAction: TextInputAction.next,
             controller: nameController,
+            keyboardType: TextInputType.text,
+            textCapitalization: TextCapitalization.sentences,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return '';
@@ -60,6 +62,7 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           TextFormField(
             textInputAction: TextInputAction.next,
             controller: priceController,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return '';
@@ -73,6 +76,8 @@ class _ItemFormState extends ConsumerState<ItemForm> {
           TextFormField(
             textInputAction: TextInputAction.done,
             controller: linkController,
+            keyboardType: TextInputType.url,
+            autocorrect: false,
             decoration: InputDecoration(
               labelText: context.t.link,
             ),
@@ -106,7 +111,9 @@ class _ItemFormState extends ConsumerState<ItemForm> {
                     ref.read(firebaseItemsProvider.notifier).add(
                           name: nameController.text,
                           description: '',
-                          price: double.parse(priceController.text),
+                          price: double.parse(
+                            priceController.text.replaceAll(',', '.'),
+                          ),
                           imageUrl: '',
                           link: linkController.text,
                         );

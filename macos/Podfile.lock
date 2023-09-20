@@ -94,6 +94,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.10)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
+  - flutter_secure_storage_macos (6.1.1):
+    - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - GoogleAppMeasurement (10.12.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.12.0)
@@ -165,6 +167,7 @@ DEPENDENCIES:
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - firebase_crashlytics (from `Flutter/ephemeral/.symlinks/plugins/firebase_crashlytics/macos`)
   - firebase_database (from `Flutter/ephemeral/.symlinks/plugins/firebase_database/macos`)
+  - flutter_secure_storage_macos (from `Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_macos/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
@@ -204,6 +207,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_crashlytics/macos
   firebase_database:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_database/macos
+  flutter_secure_storage_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_secure_storage_macos/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
   package_info_plus:
@@ -232,6 +237,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 6d998d7ef2c1723b3e798a85e61a7dc0504b1ea0
   FirebaseInstallations: b28af1b9f997f1a799efe818c94695a3728c352f
   FirebaseSessions: 991fb4c20b3505eef125f7cbfa20a5b5b189c2a4
+  flutter_secure_storage_macos: d56e2d218c1130b262bef8b4a7d64f88d7f9c9ea
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   GoogleAppMeasurement: 2d800fab85e7848b1e66a6f8ce5bca06c5aad892
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2

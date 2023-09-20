@@ -49,7 +49,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To assign photos to items, please allow permission to access your photo library.</string>
+	<string>Cette application requiert l'accès aux photos pour récupérer le code QR de la photothèque</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Cette application requiert l'accès à l'appareil photo pour scanner les codes QR</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

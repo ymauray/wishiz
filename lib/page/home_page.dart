@@ -5,7 +5,9 @@ import 'package:wishiz/l10n.dart';
 import 'package:wishiz/provider/items.dart';
 import 'package:wishiz/provider/search_text_field.dart';
 import 'package:wishiz/widget/app_name.dart';
+import 'package:wishiz/widget/app_scaffold.dart';
 import 'package:wishiz/widget/item_card.dart';
+import 'package:wishiz/widget/item_form.dart';
 import 'package:wishiz/widget/widget_utils.dart';
 
 class HomePage extends ConsumerWidget with WidgetUtils {
@@ -15,39 +17,63 @@ class HomePage extends ConsumerWidget with WidgetUtils {
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(itemsProvider);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const AppName(
-              fontSize: 30,
+    return AppScaffold(
+      appBar: AppBar(
+        title: const AppName(
+          fontSize: 30,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () async {
+              await showDialog<void>(
+                useRootNavigator: false,
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    insetPadding: const EdgeInsets.symmetric(horizontal: 8),
+                    title: Center(
+                      child: AppName(
+                        text: context.t.newItem,
+                        fontSize: 30,
+                      ),
+                    ),
+                    content: SingleChildScrollView(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: const ItemForm(),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: SearchField(),
+          ),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 2,
+                  ),
+                  child: ItemCard(item: item),
+                );
+              },
             ),
           ),
-          body: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(16),
-                child: SearchField(),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 2,
-                      ),
-                      child: ItemCard(item: item),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
@@ -83,7 +109,7 @@ class SearchField extends ConsumerWidget {
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
           hintText: context.t.search,
-          hintStyle: const TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.white.withAlpha(128)),
           prefixIcon: const Icon(Icons.search, color: Colors.white),
           suffixIcon: IconButton(
             icon: const Icon(Icons.close, color: Colors.white),

@@ -9,4 +9,8 @@ class SharedPreferencesService {
   }
 
   String get email => _instance.getString('email') ?? '';
+
+  set email(String value) {
+    _instance.setString('email', value);
+  }
 }

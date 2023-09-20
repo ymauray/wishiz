@@ -17,6 +17,8 @@
     "emailAlreadyInUse": "L'adresse courriel est déjà utilisée par un autre compte.",
     "search": "Rechercher",
     "home": "Accueil",
+    "mylist": "Ma liste",
+    "otherlists": "Autres listes",
     "settings": "Paramètres",
     "logout": "Déconnexion",
     "newItem": "Nouvel élément",

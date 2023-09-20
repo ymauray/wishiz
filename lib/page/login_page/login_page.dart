@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishiz/l10n.dart';
 import 'package:wishiz/page/login_page/login_page_state.dart';
+import 'package:wishiz/page/no_private_key_page.dart';
 import 'package:wishiz/page/tab_page/tab_page.dart';
 import 'package:wishiz/provider/firebase_service.dart';
+import 'package:wishiz/provider/secure_storage_provider.dart';
 import 'package:wishiz/provider/shared_preferences_service.dart';
 import 'package:wishiz/service/firebase_service_response.dart';
 import 'package:wishiz/widget/app_name.dart';
@@ -124,10 +125,17 @@ class LoginPage extends ConsumerWidget with WidgetUtils {
     if (response.status != FirebaseServiceResponseStatus.success) {
       errorSnack(context, firebaseErrorMessage(context, response));
     } else {
-      resetNavigation(context, (context) => const TabPage());
-      successSnack(context, context.t.successfullyLoggedIn);
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('email', email);
+      final sharedPreferencesService =
+          ref.read(sharedPreferencesServiceProvider);
+
+      // ignore: cascade_invocations
+      sharedPreferencesService.email = email;
+
+      if (await ref.read(secureStorageProvider).getPrivateKey() == null) {
+        resetNavigation(context, (context) => const NoPrivateKeyPage());
+      } else {
+        resetNavigation(context, (context) => const TabPage());
+      }
     }
   }
 
@@ -139,8 +147,7 @@ class LoginPage extends ConsumerWidget with WidgetUtils {
     if (response.status != FirebaseServiceResponseStatus.success) {
       errorSnack(context, firebaseErrorMessage(context, response));
     } else {
-      successSnack(context, context.t.accountSuccessfullyCreated);
-      resetNavigation(context, (context) => const TabPage());
+      resetNavigation(context, (context) => LoginPage());
     }
   }
 

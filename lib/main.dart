@@ -1,3 +1,4 @@
+import 'package:dartsv/dartsv.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wishiz/app.dart';
 import 'package:wishiz/firebase_options.dart';
+import 'package:wishiz/util.dart' as util;
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -36,5 +38,27 @@ void main() async {
     overlays: [SystemUiOverlay.bottom],
   );
 
-  runApp(const ProviderScope(child: MainApp()));
+  final mnemonic = Mnemonic(wordList: Wordlist.FRENCH);
+  //final seed = await mnemonic.generateMnemonic2(
+  //  (wordlist, wordListName) async {
+  //    final content = rootBundle
+  //        .loadString('assets/dartsv/bip39/wordlists/$wordListName.txt');
+  //    return content;
+  //  },
+  //);
+  const phrase =
+      'endiguer malaxer antidote taureau emporter glisser devancer armoire coyote mignon irradier éléphant';
+  final seed = mnemonic.toSeedHex(phrase, 'gscmmj12');
+  final privateKey = HDPrivateKey.fromSeed(seed, NetworkType.TEST);
+  final prvk = privateKey.deriveChildNumber(0);
+  debugPrint(prvk.toString());
+  debugPrint(prvk.publicKey.toString());
+  final sendPrvk = prvk.privateKey;
+  final sendPubk = prvk.publicKey;
+  debugPrint(sendPrvk.toString());
+  debugPrint(sendPubk.toString());
+
+  debugPrint(util.secondsToCustomString());
+
+  runApp(const ProviderScope(child: App()));
 }

@@ -3,6 +3,7 @@
         android:label="Wishiz"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <uses-permission android:name="android.permission.CAMERA" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
